@@ -1,0 +1,1304 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/vendor/jquery-ui/jquery-ui.min.css?BuildNo=@System.Web.Configuration.WebConfigurationManager.AppSettings["BuildNo"]" rel="stylesheet" />
+    <link href="~/css/popups.css?BuildNo=@System.Web.Configuration.WebConfigurationManager.AppSettings["BuildNo"]" rel="stylesheet" />
+    <link href="~/css/chosen/chosen.css?BuildNo=@System.Web.Configuration.WebConfigurationManager.AppSettings["BuildNo"]" rel="stylesheet" />
+    @*<link href="~/vendor/jquery-ui/jquery-ui.css" rel="stylesheet" />*@
+    <link href="~/css/style.css?BuildNo=@System.Web.Configuration.WebConfigurationManager.AppSettings["BuildNo"]" rel="stylesheet" />
+    <title>Adpro - Booking</title>
+    <script type="text/javascript">
+        var appRoot = '@System.Web.Configuration.WebConfigurationManager.AppSettings["RootPath"]';
+    </script>
+    <style tye="text/css">
+        select.form-control:not([size]):not([multiple]) {
+            height: auto !important;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 .2rem #1dcee2 !important;
+        }
+
+        input {
+            font-weight: 600;
+        }
+
+        select {
+            font-weight: 600;
+        }
+
+        .lnkAdType:hover {
+            color: #ffffff !important;
+        }
+
+        .ui-autocomplete.ui-widget {
+            font-family: Verdana,Arial,sans-serif;
+            /*font-size: 12px;*/
+            font-size: 11px;
+            /*max-height: 150px;*/
+            overflow-x: hidden !important;
+            overflow-y: auto;
+            white-space: nowrap;
+        }
+
+        .ui-autocomplete-input {
+            text-transform: uppercase;
+        }
+
+        /*#clientid {
+            text-transform: none !important;
+        }*/
+        .capitalise {
+            text-transform: uppercase !important;
+        }
+
+        .noncapitalise {
+            text-transform: none !important;
+        }
+
+        .table-subfilter .multiselect-container > li > a > label {
+            padding: 2px 10px 2px 30px;
+            width: 100%;
+            color: #000 !important;
+            font-size: 12px !important;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+            width: 220px !important;
+        }
+
+
+        #bookingGrid td {
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .orderrowactive {
+            color: #ffffff;
+        }
+
+        .ordergridselected {
+            background-color: #385723 !important;
+        }
+
+        .rowactive {
+            /*color: #fc0048;*/
+            color: #ffffff;
+        }
+
+        .gridselected {
+            background-color: #385723 !important;
+        }
+
+        .rowSelected {
+            color: #ffffff;
+            background-color: #385723 !important;
+        }
+
+        .PendingRoSelected {
+            color: #ffffff;
+            background-color: #385723 !important;
+        }
+
+        .table-rate-calculation input {
+            text-align: right;
+        }
+
+        /*new add for history table*/
+        .tables tr:nth-child(2n+1) {
+            vertical-align: middle;
+            border-left: .3px solid #dddddd;
+            border-top: .3px solid #dddddd;
+            background-color: #cbcbcb;
+            line-height: 1.5;
+        }
+
+        .tables tr th {
+            vertical-align: middle;
+            border-left: .3px solid #ddd;
+            border-top: .3px solid #dddddd;
+            background-color: #404040;
+            color: #fff;
+            font-size: 12px;
+            line-height: 1.44;
+        }
+
+        .tables tr td {
+            vertical-align: middle;
+            border-top: .3px solid #dddddd;
+            font-size: 12px;
+            line-height: 1.44;
+        }
+
+        .tables tr:nth-child(2n) {
+            vertical-align: middle;
+            border-left: .3px solid #dddddd;
+            border-top: .3px solid #dddddd;
+            background-color: #e7e7e7;
+            line-height: 1.5;
+        }
+
+        .insertion-box {
+            padding: 0px !important;
+            margin-bottom: 2px !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .ui-datepicker {
+            padding: .2em .2em 0;
+            display: none;
+            font-size: 13.5px !important;
+        }
+
+        #rodatePicker .ui-datepicker table {
+            width: 100%;
+            font-size: .6em;
+            border-collapse: collapse;
+            margin: 0 0 .4em;
+        }
+
+        .ui-datepicker .ui-datepicker-buttonpane {
+            display: none !important;
+        }
+
+        #datePicker .ui-datepicker-multi-2 .ui-datepicker-group {
+            width: 45% !important;
+            margin-right: 10px !important;
+            margin-left: 10px !important;
+            border: 1px solid !important;
+            height: 170px;
+        }
+
+        .margin_left {
+            padding-right: 15px !important;
+        }
+
+        #divAddrPopUp label {
+            width: 140px !important;
+        }
+
+        #divAddrPopUp input {
+            width: 60% !important;
+            font-weight: inherit !important;
+        }
+
+        #divAddrPopUp select {
+            width: 60% !important;
+            height: 30px !important;
+            font-weight: inherit !important;
+        }
+
+        .RateColor {
+            background-color: red;
+        }
+
+        .action-bar > a {
+            font-size: 12px !important;
+        }
+
+        #datePicker .ui-state-highlight {
+            border: 1px solid #c5c5c5 !important;
+            background: none !important;
+            color: none !important;
+        }
+
+        #lblViewAgencyPopupData table tr:hover {
+            background-color: #385723 !important;
+            color: #fc0048;
+        }
+
+        #lblViewClientPopupData table tr:hover {
+            background-color: #385723 !important;
+            color: #fc0048;
+        }
+
+
+
+        #packageid_chosen {
+            width: 100% !important;
+        }
+
+        .chosen-choices {
+            height: 22px !important;
+        }
+
+        #packageid {
+            height: 22px;
+            display: block;
+            width: 100%;
+            line-height: 1.5;
+            color: #495057;
+            background-clip: padding-box;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            overflow: hidden;
+            border: 0px !important;
+        }
+
+        #dstabledetail input {
+            font-size: 11px;
+        }
+
+        #dstabledetail select {
+            font-size: 11px;
+        }
+
+        #cltabledetail input {
+            font-size: 11px;
+        }
+
+        #cltabledetail select {
+            font-size: 11px;
+        }
+
+        .table-selected-row {
+            color: black;
+            background-color: #70ad47;
+        }
+
+        .chzn-select {
+            display: none
+        }
+
+        #datePicker .ui-datepicker {
+            width: 690px !important;
+        }
+
+        .ui-datepicker-multi-3 .ui-datepicker-group {
+            width: 32.3%;
+            margin-left: 7px;
+        }
+
+        .table-reciept-total tr td {
+            border: 1px solid #808080;
+            padding: 2px;
+            text-align: center;
+            background-color: #f2f2f2;
+            width: 20.5%;
+        }
+
+        .action-bar {
+            padding: 10px 195px !important;
+        }
+
+    </style>
+    <script type="text/javascript">
+        var serverDate = new Date(@DateTime.Now.Month+'/' +    @DateTime.Now.Day+'/' +    @DateTime.Now.Year);
+        var DownloadType='@System.Web.Configuration.WebConfigurationManager.AppSettings["DownloadType"]';
+    </script>
+</head>
+<body>
+    <header>
+
+        <!-- Fixed navbar -->
+        <nav class="navbar top-navigation bg-forestgreen">
+            <a class="site-menu" onclick="OpenBuildToggle()"><img src="~/img/menu-32.png" alt="" /></a>
+            <a class="navbar-brand" href="#"><img src="~/img/logo.png" alt="" onclick="return window.location.reload(true)" /></a>
+
+            <div class="navigation-box" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" onclick="return window.location.reload(true)">Booking <span class="sr-only">(current)</span></a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link" href="#">Typesetting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Receipts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Material</a>
+                        </li>*@
+                </ul>
+            </div>
+            <span class="user-detail"></span>
+            @*<a class="user-menu"><img src="~/img/user-32.png" alt="" onclick="javascript: $('#divLogOutBox').modal()" /></a>*@
+        </nav>
+
+        @* hidden value *@
+        <input type="hidden" id="hdnUserId" value="0" />
+        <input type="hidden" id="hdnUserType" value="0" />
+        <input type="hidden" id="hdnpeid" />
+        <input type="hidden" id="hdnpackageid" />
+        <input type="hidden" id="hdnpackagename" />
+        <input type="hidden" id="hdnpecode" />
+        <input type="hidden" id="hdninsnum" />
+        <input type="hidden" id="hdnQueryString" @*value="@Utility.Decrypt(Request.Url.AbsoluteUri.Split('?')[1])"*@ />
+        <input type="hidden" id="txtratecardid" />
+        <input type="hidden" id="txtadrateid" />
+        @*<input type="hidden" id="txtagreeddiscountamount" />*@
+        <input type="hidden" id="hdnronumberfocus" value="0" />
+        <input type="hidden" id="txtrostatus" value="0" />
+        <input type="hidden" id="txtstatus" />
+        <input type="hidden" id="txtauditstatus" />
+        <input type="hidden" id="hdnsizetext" />
+        <input type="hidden" id="txtadsizewidth" />
+        <input type="hidden" id="txtadsizeheight" />
+        <input type="hidden" id="hdnpackageidlist" />
+        <input type="hidden" id="hdnroid" value="0" />
+        <input type="hidden" id="hdnsourceroid" value="0" />
+        <input type="hidden" id="hdnschemeid" value="0" />
+        <input type="hidden" id="hdnschemedetailid" value="0" />
+        <input type="hidden" id="hdnratefieldchanged" value="0" />
+        <input type="hidden" id="hdnitemratefieldchanged" value="0" />
+        <input type="hidden" id="hdnbillablesize" />
+        <input type="hidden" id="hdnextrachargeamount" value="0" />
+        <input type="hidden" id="hdnextradiscamount" value="0" />
+        <input type="hidden" id="hdnagreedrate" value="0" />
+        <input type="hidden" id="hdnagreedamount" value="0" />
+        <input type="hidden" id="hdnagreedamountvalue" value="0" />
+        <input type="hidden" id="hdnagreedratefieldchanged" value="0" />
+        <input type="hidden" id="NetReceivableForCheck" />
+        <input type="hidden" id="NetReceivableForReceipt" value="0" />
+        <input type="hidden" id="hdnbackdatedays" />
+        <input type="hidden" id="hdnwriteoffamount" />
+        <input type="hidden" id="hdnmaxdiscountforautoapproval" />
+        <input type="hidden" id="hdntexttypinginbooking" />
+        <input type="hidden" id="hdnautofoldercreationforclassifiedorders" />
+        <input type="hidden" id="hdnratedate" />
+        <input type="hidden" id="hdninsagreedrate" />
+        <input type="hidden" id="hdninsagreedamount" />
+        <input type="hidden" id="hdninsagreeddiscper" />
+        <input type="hidden" id="hdnsaveflag" value="0" />
+        <input type="hidden" id="hdnnewsaveflag" value="0" />
+        <input type="hidden" id="hdnbookingdate" value="0" />
+        <input type="hidden" id="TotalRecordReturn" value="0" />
+        <input type="hidden" id="hdnlistindex" value="0" />
+        <input type="hidden" id="hdnmbodychange" value="0" />
+        <input type="hidden" id="hdnMachineID" />
+        <input type="hidden" id="hdnMachineName" />
+        <input type="hidden" id="hdnMaterialID" />
+        <input type="hidden" id="hdnallowcredit" value="0" />
+        <input type="hidden" id="hdnClassifiedMaterialPath" />
+        <input type="hidden" id="hdnJobPath" />
+        <input type="hidden" id="hdnROFilePath" />
+        <input type="hidden" id="hdnROFileRoid" />
+        <input type="hidden" id="hdnROFileJobID" />
+        <input type="hidden" id="hdnallowdisplay" />
+        <input type="hidden" id="hdnallowclassified" />
+        <input type="hidden" id="hdnallowmanualbilling" />
+        <input type="hidden" id="hdnallowreceiptcancel" />
+        <input type="hidden" id="hdnallowsuspend" />
+        <input type="hidden" id="hdnallowcancel" />
+        <input type="hidden" id="hdnreadonly" value="0" />
+        <input type="hidden" id="hdncategoryname" />
+        <input type="hidden" id="hdnBlockdate" />
+        <input type="hidden" id="hdnauditdate" />
+        <input type="hidden" id="hdntableno" value="0" />
+        <input type="hidden" id="hdnfilename" value="0" />
+        <input type="hidden" id="hdnIsGetClientClicked" value="0" />
+        <input type="hidden" id="hdnrcptagencyid" value="0" />
+        <input type="hidden" id="hdnrcptcasualclientid" value="0" />
+        <input type="hidden" id="hdnrcptcasualclientaddress" />
+        <input type="hidden" id="hdnrcptcasualclientcity" />
+        <input type="hidden" id="hdnrcptcasualclientzip" />
+        <input type="hidden" id="hdnrcptcasualclientphone" />
+        <input type="hidden" id="hdnrcptpendingronet" value="0" />
+        <input type="hidden" id="hdnpendingwriteoffamount" value="0" />
+        <input type="hidden" id="hdnsaveenable" value="0" />
+
+
+        <div class="secondary-navigation">
+            <ul class="navigation-item">
+                <li class="active" id="allowdisplay">
+                    <a class="nav-link active lnkAdType" val="0">Display</a>
+                </li>
+                <li id="allowclassified">
+                    <input type="hidden" id="hdnIsClassified" value="0" />
+                    <a class="nav-link lnkAdType" id="a" val="1">Classified</a>
+                </li>
+            </ul>
+            <div class="switch-set-left" style="margin-left:340px !important;">
+                <label class="switch switch-left-right margin-r-10" id="customerlabel">
+                    <input class="switch-input" type="checkbox" id="customertypetoggle" onchange="SwitchCustomerTypeValue()" checked />
+                    <input type="hidden" id="hdnIsCustomerType" />
+                    <span class="switch-label" id="customertype" data-on="Casual" data-off="Regular"></span>
+                    <span class="switch-handle"></span>
+                </label>
+                <label class="switch switch-left-right margin-r-10" id="paylabel" name="paymentlabel">
+                    <input class="switch-input" type="checkbox" id="paymenttypetoggle" onchange="SwitchtoggleTypeValue()" checked />
+                    <input type="hidden" id="hdnIsPaymentType" value="0" />
+                    <span class="switch-label" id="paymentmode" data-on="Prepaid" data-off="Credit"></span>
+                    <span class="switch-handle"></span>
+                </label>
+            </div>
+
+            <div class="switch-set-right">
+                @*<label class="switch switch-left-right margin-r-10">
+                        <input class="switch-input" type="checkbox" id="backdatedtoggle" onchange="SwitchBackDatetoggle()" />
+                        <input type="hidden" id="hdnIsBackdate" />
+                        <span class="switch-label" data-on="Back date Order" data-off="Back date   Off"></span>
+                        <span class="switch-handle"></span>
+                    </label>
+                    <label class="switch switch-left-right margin-r-10" id="manualbilllabel">
+                        <input class="switch-input" type="checkbox" id="manualbilltoggle" onchange="SwitchManualBilltoggle()" />
+                        <input type="hidden" id="hdnIsManualBill" />
+                        <span class="switch-label" data-on="Manual Bill" data-off="Manual Bill   Off"></span>
+                        <span class="switch-handle"></span>
+                    </label>*@
+            </div>
+
+            <div class="filter-bar" style="margin-left:155px !important;">
+                @*<div class="filter-input">
+                        <input id="txtReceiptNo" type="text" class="form-control form-control-sm" placeholder="ReceiptID" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" parameter="ReceiptNo" autocomplete="off" />
+                        <button class="btn btn-sm btn-filter-search" type="button"><img src="~/img/search-filled-20.png" alt="" onclick="GetReceiptDetail()" /></button>
+                    </div>*@
+                <div class="filter-input">
+                    <input id="txtOrderNo" type="text" class="form-control form-control-sm" placeholder="ROID" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" parameter="OrderNo" autocomplete="off" />
+                    <button class="btn btn-sm btn-filter-search" type="button"><img src="~/img/search-filled-20.png" alt="" onclick="GetRoidDetail()" /></button>
+                </div>
+                <div class="filter-input">
+                    <input id="txtBookingNo" type="text" class="form-control form-control-sm" placeholder="BookingID" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" parameter="BookingNo" autocomplete="off" />
+                    <button class="btn btn-sm btn-filter-search" type="button"><img src="~/img/search-filled-20.png" alt="" onclick="GetBookingDetail()" /></button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="site-container" id="maindivs">
+
+        <div class="main-content">
+            <div class="column-left">
+                <div class="card" style="height:305px;">
+                    <div class="card-body">
+                        <table class="table table-sm table-borderless margin-b-0 table-subfilter" id="orderlevelinfo" style="height:295px;">
+                            <tbody>
+                                <tr>
+                                    <td class="bg-white-85">Agency</td>
+                                    <td class="bg-white-95" colspan="3" style="background:darkgrey;">
+                                        <input type="text" class="form-control" id="agencyid" parameter="agency" autocomplete="off" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-white-85">Client</td>
+                                    <td class="bg-white-95" colspan="3">
+                                        <span>
+                                            <input type="text" class="form-control" style="background-color:#fff !important;" id="clientid" parameter="client" autocomplete="off" />
+                                            <input type="button" class="right" id="clientadd" onclick="BookingAddressDetail()" value="Addr" style="display:none;float: right; margin-top: -20px;" />
+                                        </span>
+                                    </td>
+                                </tr>
+                                @*<tr>
+                                        <td class="bg-white-85">Canvasser</td>
+                                        <td class="bg-white-95" colspan="3">
+                                            <input type="text" class="form-control" style="background-color:#fff !important;" id="canvassorid" parameter="canvassor" autocomplete="off" />
+                                        </td>
+                                    </tr>*@
+                                <tr>
+                                    <td class="bg-white-85">RO No.</td>
+                                    <td class="bg-white-95" colspan="3">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="txtronumber" autocomplete="off" />
+                                    </td>
+                                    @*<td class="bg-white-85">RO Date</td>
+                                        <td class="bg-white-95">
+                                            <input type="text" class="form-control" id="rodatePicker" placeholder="RO Date..." readonly="readonly" />
+                                        </td>*@
+                                </tr>
+                                @*<tr>
+                                        <td class="bg-white-85">Ad Type</td>
+                                        <td class="bg-white-95">
+                                            <select class="form-control" style="background-color:#fff !important;" id="adtypeid" parameter="adtype"></select>
+                                        </td>
+                                        <td class="bg-white-85">RO Type</td>
+                                        <td class="bg-white-95">
+                                            <select class="form-control" style="background-color:#fff !important;" id="rotypeid" newflag="forXmltype" parameter="rotype"></select>
+                                        </td>
+                                    </tr>*@
+                                <tr>
+                                    <td class="bg-white-85">Product</td>
+                                    <td class="bg-white-95" style="width:150px;">
+                                        <select class="form-control" style="background-color:#fff !important;" id="productid" newflag="forXmltype" parameter="product"></select>
+                                    </td>
+                                    <td class="bg-white-85">Brand</td>
+                                    <td class="bg-white-95">
+                                        <select class="form-control" style="background-color:#fff !important;" id="brandid" parameter="brand"></select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    @*<td class="bg-white-85">SME</td>
+                                        <td class="bg-white-95">
+                                            <select class="form-control" style="background-color:#fff !important;" id="smeid" newflag="forXmltype" parameter="sme"></select>
+                                        </td>*@
+                                    <td class="bg-white-85">Box</td>
+                                    <td class="bg-white-95">
+                                        <select class="form-control" style="background-color:#fff !important;" id="boxtypeid" newflag="forXmltype" parameter="boxtype"></select>
+                                    </td>
+                                    <td class="bg-white-85">Box No.</td>
+                                    <td class="bg-white-95" colspan="3">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="txtronumber" autocomplete="off" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-white-85">Package</td>
+                                    <td class="bg-white-95" colspan="3" id="packageiddiv">
+                                        @*<select class="form-control" style="background-color:#fff !important;" id="packageid" parameter="package" multiple="multiple" searchable="Search here.."></select>*@
+                                        <select id="packageid" newflag="forXmltype" parameter="package" style="background-color:#fff !important;" class="chosen" data-order="true" name="multiselect[]" multiple="true" data-placeholder="Type Package"></select>
+                                    </td>
+
+                                </tr>
+                                <tr id="tr1">
+                                    <td class="bg-white-85">Premia</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="premiaid" parameter="premia" autocomplete="off" />
+                                    </td>
+                                    <td class="bg-white-85">Color</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="colorid" parameter="color" autocomplete="off" />
+                                    </td>
+                                </tr>
+                                <tr id="tr2">
+                                    <td class="bg-white-85">Size</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="adsizeid" parameter="adsize" autocomplete="off" />
+                                    </td>
+                                    <td class="bg-white-85">Caption</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="colorid" parameter="color" autocomplete="off" />
+                                    </td>
+
+                                </tr>
+                                <tr id="tr3">
+                                    <td class="bg-white-85">RO/Mat File</td>
+                                    <td class="bg-white-95" colspan="3">
+                                        <div class="custom-file">
+                                            <input type="text" id="rofile" class="form-control" onclick="RoFileAttch()" placeholder="Click here" readonly="readonly" style="cursor:auto;" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="tr4">
+                                    <td class="bg-white-85">Remarks</td>
+                                    <td class="bg-white-95" colspan="3" id="packageiddiv">
+                                        @*<select class="form-control" style="background-color:#fff !important;" id="packageid" parameter="package" multiple="multiple" searchable="Search here.."></select>*@
+                                        <select id="packageid" newflag="forXmltype" parameter="package" style="background-color:#fff !important;" class="chosen" data-order="true" name="multiselect[]" multiple="true" data-placeholder="Type Package"></select>
+                                    </td>
+
+                                </tr>
+
+                                <tr id="tr5" style="display:none;">
+                                    <td class="bg-white-85">Cat 1</td>
+                                    <td class="bg-white-95">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid1" parameter="categorylist" />
+                                    </td>
+                                    <td class="bg-white-85">Cat 2</td>
+                                    <td class="bg-white-95">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid2" parameter="categorylist" />
+                                    </td>
+                                    </>
+                                <tr id="tr6" style="display:none;">
+                                    <td class="bg-white-85">Cat 3</td>
+                                    <td class="bg-white-95">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid3" parameter="categorylist" />
+                                    </td>
+                                    <td class="bg-white-85">Cat 4</td>
+                                    <td class="bg-white-95">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid4" parameter="categorylist" />
+                                    </td>
+                                </tr>
+
+                                <tr id="tr7" style="display:none;">
+                                    <td class="bg-white-85">Style</td>
+                                    <td class="bg-white-95">
+                                        <select class="form-control" style="background-color:#fff !important;" id="stylesheetid" parameter="style"></select>
+                                    </td>
+                                    <td class="bg-white-85">Word/Ht</td>
+                                    <td class="bg-white-95">
+                                        <input class="form-control" type="text" id="mbodysize" onkeydown="return validateCharacters(this,event, 'numeric')" autocomplete="off" maxlength="3" style="width:45px;" />
+                                    </td>
+                                </tr>
+
+                                <tr id="tr8" style="display:none;">
+                                    <td class="bg-white-85">Logo</td>
+                                    <td class="bg-white-95">
+                                        <input type="text" id="rofile" class="form-control" onclick="RoFileAttch()" placeholder="Click here" readonly="readonly" style="cursor:auto;" />
+                                    </td>
+                                    <td class="bg-white-85">Text Matter</td>
+                                    <td class="bg-white-95">
+                                        <div class="custom-file">
+                                            <input type="text" id="rofile" class="form-control" onclick="return $('#AdtextPopUp').dialog('open');" placeholder="Type Text here" readonly="readonly" style="cursor:auto;" />
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="width: 306%;">
+                    <div class="card flexible-box" style="overflow:hidden;/* width:160%; */float: left;">
+                        <div class="card-body">
+                            <div class="insertion-box">
+                                <form class="form-inline ins-form">
+                                    <div class="form-group" id="innerbox">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" style="min-width: 43px;width:20%;display:none;">
+                                                        <select parameter="ProductionDate" ctrltype="LBX" class="form-control marginTop5" size="5" style="min-width: 50px; font-size: .91em; height: 115px; width: 100%;display:none;"></select>
+                                                        <input type="hidden" parameter="DateEditable" value="1">
+                                                        <input type="hidden" ctrltype="HDN" parameter="AdMaterialIdList" value="">
+                                                    </td>
+                                                    <td valign="top">
+                                                        <div style="margin-bottom: 1px;margin-top: -4px;font-size: 13px;">
+                                                            <input id="ins" parameter="NoOfInsertion" type="text" class="form-control form-control-ins" placeholder="Num of Ins" value="0" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="3" autocomplete="off">
+                                                            <input id="txtDayGap" type="text" class="form-control left" value="0" maxlength="1" style="display:none;">
+                                                            <input type="button" class="btn btn-darkgreean-small" id="btndaily" value="Daily" style="height:22px;">
+                                                            <a id="lnkTodayDate"></a>
+                                                        </div>
+                                                        <div id="datePicker" class="hasDatepicker">
+                                                            <div class="ui-datepicker-inline ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all ui-datepicker-multi-3 ui-datepicker-multi" style="width: 51em; display: block;"><div class="ui-datepicker-group ui-datepicker-group-first"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-left"><a class="ui-datepicker-prev ui-corner-all" data-handler="prev" data-event="click" title="Prev"><span class="ui-icon ui-icon-circle-triangle-w">Prev</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">August</span>&nbsp;<span class="ui-datepicker-year">2020</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th scope="col" class="ui-datepicker-week-end"><span title="Sunday">Su</span></th><th scope="col"><span title="Monday">Mo</span></th><th scope="col"><span title="Tuesday">Tu</span></th><th scope="col"><span title="Wednesday">We</span></th><th scope="col"><span title="Thursday">Th</span></th><th scope="col"><span title="Friday">Fr</span></th><th scope="col" class="ui-datepicker-week-end"><span title="Saturday">Sa</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">1</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">2</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">3</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">4</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">5</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">6</a></td><td class="  ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default ui-state-highlight" href="#">7</a></td><td class=" ui-datepicker-week-end ui-datepicker-days-cell-over  ui-datepicker-current-day" data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default ui-state-active ui-state-hover" href="#">8</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">9</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">10</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">11</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">12</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">14</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">15</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">16</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">17</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">18</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">19</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">20</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">21</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">22</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">23</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">24</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">25</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">26</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">27</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">28</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">29</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">30</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="7" data-year="2020"><a class="ui-state-default" href="#">31</a></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div><div class="ui-datepicker-group ui-datepicker-group-middle"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix"><div class="ui-datepicker-title"><span class="ui-datepicker-month">September</span>&nbsp;<span class="ui-datepicker-year">2020</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th scope="col" class="ui-datepicker-week-end"><span title="Sunday">Su</span></th><th scope="col"><span title="Monday">Mo</span></th><th scope="col"><span title="Tuesday">Tu</span></th><th scope="col"><span title="Wednesday">We</span></th><th scope="col"><span title="Thursday">Th</span></th><th scope="col"><span title="Friday">Fr</span></th><th scope="col" class="ui-datepicker-week-end"><span title="Saturday">Sa</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">1</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">2</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">3</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">4</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">5</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">6</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">7</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">8</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">9</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">10</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">11</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">12</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">14</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">15</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">16</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">17</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">18</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">19</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">20</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">21</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">22</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">23</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">24</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">25</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">26</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">27</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">28</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">29</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="8" data-year="2020"><a class="ui-state-default" href="#">30</a></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div><div class="ui-datepicker-group ui-datepicker-group-last"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-right"><a class="ui-datepicker-next ui-corner-all" data-handler="next" data-event="click" title="Next"><span class="ui-icon ui-icon-circle-triangle-e">Next</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">October</span>&nbsp;<span class="ui-datepicker-year">2020</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th scope="col" class="ui-datepicker-week-end"><span title="Sunday">Su</span></th><th scope="col"><span title="Monday">Mo</span></th><th scope="col"><span title="Tuesday">Tu</span></th><th scope="col"><span title="Wednesday">We</span></th><th scope="col"><span title="Thursday">Th</span></th><th scope="col"><span title="Friday">Fr</span></th><th scope="col" class="ui-datepicker-week-end"><span title="Saturday">Sa</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">1</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">2</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">3</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">4</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">5</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">6</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">7</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">8</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">9</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">10</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">11</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">12</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">14</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">15</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">16</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">17</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">18</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">19</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">20</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">21</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">22</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">23</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">24</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">25</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">26</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">27</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">28</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">29</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">30</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="9" data-year="2020"><a class="ui-state-default" href="#">31</a></td></tr><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div><div class="ui-datepicker-row-break"></div></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card flexible-box" id="tblreceipt" style="pointer-events:none;float: right;width: 47%;height: 208px;">
+                        <div class="card-body">
+                            <p class="reciept-num" style="float:left">ROID <span id="spnroid">#####</span></p>
+                            <p class="receipt-details" style="margin-left:200px;">
+
+                                <span> Deferred </span>
+                            </p>
+                            <p class="receipt-checkbox">
+                                <input type="checkbox" id="chkdiffer" style="height:15px;width:20px;" onclick="CheckDifferReceipt()">
+                                <input type="hidden" id="hdnchkdiffer" value="0">
+                            </p>
+                            <p class="reciept-num">ReceiptID <span id="spnreceiptnum">#####</span></p>
+                            <table class="table table-sm table-borderless margin-b-0 table-reciept" id="tablereceiptdetails">
+                                <thead>
+                                    <tr>
+                                        <th style="width:120px">Pay Mode</th>
+                                        <th style="width:120px">Branch Code</th>
+                                        <th style="width:120px">Number</th>
+                                        <th style="width:120px">Cheque Date</th>
+                                        <th style="width:120px">Amount</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="receiptfield1">
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtpaymentmodeid" newflag="forReceiptXmltype" parameter="receiptpaymentmode"></select>
+                                        </td>
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtbankname" newflag="forBranchXmltype" parameter="branchcode"></select>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum" style="width: 120px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum" style="width: 120px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtamount" style="width: 113px;text-align:right !important;" onkeydown="return validateCharacters(this,event, 'amount')" autocomplete="off">
+                                        </td>
+                                    </tr>
+                                    <tr id="receiptfield2">
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtpaymentmodeid1" newflag="forReceiptXmltype" parameter="receiptpaymentmode"></select>
+                                        </td>
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtbankname1" newflag="forBranchXmltype" parameter="branchcode"></select>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum1" style="width:120px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum1" style="width:120px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtamount1" style="width:113px;text-align:right !important;" onkeydown="return validateCharacters(this,event, 'amount')" autocomplete="off">
+                                        </td>
+                                    </tr>
+                                    <tr id="receiptfield3">
+                                        <td>
+                                            <select style="background-color:#fff !important;width:120px;" id="txtpaymentmodeid2" newflag="forReceiptXmltype" parameter="receiptpaymentmode"></select>
+                                        </td>
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtbankname2" newflag="forBranchXmltype" parameter="branchcode"></select>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum2" style="width:120px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum2" style="width:120px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtamount2" style="width:113px;text-align:right !important;" onkeydown="return validateCharacters(this,event, 'amount')" autocomplete="off">
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                            <table class="table table-sm table-borderless margin-b-0 margin-t-5 table-reciept-total">
+                                <thead>
+                                    <tr>
+                                        <td>T. Amt</td>
+                                        <td>
+                                            <input type="text" id="txtreceiptamount" style="width:115px;text-align:right;" onkeydown="return validateCharacters(this,event, 'numeric')" autocomplete="off">
+                                        </td>
+                                        <td>Return</td>
+                                        <td id="txtreturnamount" style="text-align:right;"></td>
+                                        <td>
+                                            <input type="button" class="btn btn-darkgreean-small" onclick="TotalWriteoffAmount()" value="Write off">
+                                        </td>
+                                        @*<td id="txtwriteoffamount" style="text-align:right !important"></td>*@
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="column-center" style="flex: 0 0 43.333333% !important;max-width: 43.333333% !important;height:315px !important;">
+                <div class="card flexible-box">
+                    <div class="card-body">
+                        <table class="table table-sm table-borderless margin-b-0 table-ad-detail">
+                            <thead>
+                                <tr id="displayheader" style="white-space:nowrap;">
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;Ins</th>
+                                    <th>&nbsp;Date</th>
+                                    <th>&nbsp;Package</th>
+                                    <th>&nbsp;Status</th>
+                                    <th>&nbsp;Ag. Rate</th>
+                                    <th>&nbsp;&nbsp;Ag. Amt</th>
+                                    <th>&nbsp;&nbsp;Ag. Disc%</th>
+                                    <th>&nbsp;&nbsp;Color</th>
+                                    <th>&nbsp;&nbsp;Premia</th>
+                                    <th>&nbsp;&nbsp;Size</th>
+                                    <th>&nbsp;&nbsp;Bill.Size</th>
+                                    <th>&nbsp;&nbsp;MatType</th>
+                                    <th>&nbsp;&nbsp;Caption</th>
+                                    <th>&nbsp;&nbsp;Paid/free</th>
+                                    <th>&nbsp;&nbsp;Premia %</th>
+                                    <th>&nbsp;&nbsp;Color %</th>
+                                    <th>&nbsp;&nbsp;Box Num</th>
+                                </tr>
+                                <tr id="classifiedheader" style="display:none;white-space:nowrap;">
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;Ins</th>
+                                    <th>&nbsp;Date</th>
+                                    <th>&nbsp;Package</th>
+                                    <th>&nbsp;Status</th>
+                                    <th>&nbsp;Ag. Rate</th>
+                                    <th>&nbsp;&nbsp;Ag. Amt</th>
+                                    <th>&nbsp;&nbsp;Ag. Disc%</th>
+                                    <th>&nbsp;&nbsp;MbodySize</th>
+                                    @*<th>&nbsp;&nbsp;MatType</th>*@
+                                    <th>&nbsp;&nbsp;Paid/free</th>
+                                    <th>&nbsp;&nbsp;Category</th>
+                                    <th>&nbsp;&nbsp;Box Num</th>
+                                    <th>&nbsp;&nbsp;StyleSheetID</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingGrid"></tbody>
+                        </table>
+                    </div>
+                </div>
+                @*<div>
+                        <label>Box Add.</label>
+                        <input type="text" class="form-control" style="background-color:#fff !important;" id="boxaddressid" parameter="boxaddress" />
+                    </div>*@
+
+                <div class="card" style="display:none;">
+                    <div class="card-body">
+                        <div class="card-label" style="display:none;">
+                            <div class="card-label-col">Ins: <span id="spnins"></span></div>
+                            <div class="card-label-col">Date: <span id="spndate"></span> </div>
+                            <div class="card-label-col">PE: <span id="spnpe"></span></div>
+
+                        </div>
+                        <table class="table table-sm table-borderless margin-b-0 table-item-detail" id="dstabledetail" style="display:none;">
+                            <tbody>
+                                <tr>
+                                    <td class="bg-white-85">Premia</td>
+                                    <td class="bg-white-95" align="center" style="width:50%">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="premiaid" parameter="premia" autocomplete="off" />
+                                    </td>
+                                    <td class="bg-white-85">Color</td>
+                                    <td class="bg-white-95" align="center" style="width:25%;">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="colorid" parameter="color" autocomplete="off" />
+                                    </td>
+                                    <td class="bg-white-85">Size</td>
+                                    <td class="bg-white-95" align="center" style="width:30%">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="adsizeid" parameter="adsize" autocomplete="off" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-white-85">Caption</td>
+                                    <td class="bg-white-95" align="center" style="background:#fff !important;">
+                                        <input class="form-control" type="text" id="txtitemcaption" autocomplete="off">
+                                    </td>
+                                    <td class="bg-white-85">M.Type</td>
+                                    <td class="bg-white-95">
+                                        <select class="form-control" style="background-color:#fff !important;" id="mattypeid" newflag="forXmltype" parameter="materialtype"></select>
+                                    </td>
+                                    <td class="bg-white-85">B.Size</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input class="form-control" type="text" id="billablesize" autocomplete="off" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-white-85" style="font-size:11.5px !important;">Ag.Rate</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;background-color: white;" id="dsitemagrate" onkeydown="return validateCharacters(this,event, 'amount')" disabled="disabled" autocomplete="off">
+                                    </td>
+                                    <td class="bg-white-85" style="font-size:11.5px !important;">Ag.Disc</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;background-color: white;" id="dsitemagdisc" onkeydown="return validateCharacters(this,event, 'amount')" disabled="disabled" autocomplete="off">
+                                    </td>
+                                    <td class="bg-white-85" style="font-size:11.5px !important;">Ag.Amt</td>
+                                    <td class="bg-white-95" align="center">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;background-color: white;" id="dsitemagamount" onkeydown="return validateCharacters(this,event, 'amount')" disabled="disabled" autocomplete="off">
+                                    </td>
+                                </tr>
+
+                                <tr style="display:none;">
+                                    <td class="bg-white-85">Paid</td>
+                                    <td class="bg-white-95">
+                                        <select class="form-control" style="background-color:#fff !important;pointer-events:none;" id="isdisplaypaid">
+                                            <option value="0" selected>Y</option>
+                                            <option value="1">N</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        <table class="table table-sm table-borderless margin-b-0 table-item-detail" id="cltabledetail" style="display:none;">
+                            <tbody>
+                                <tr>
+                                    <td class="bg-white-85">Cat 1</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid1" parameter="categorylist" />
+                                    </td>
+                                    <td class="bg-white-85">Cat 2</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid2" parameter="categorylist" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-white-85">Cat 3</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid3" parameter="categorylist" />
+                                    </td>
+                                    <td class="bg-white-85">Cat 4</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <input type="text" class="form-control" style="background-color:#fff !important;" id="categoryid4" parameter="categorylist" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="bg-white-85">Style</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <select class="form-control" style="background-color:#fff !important;" id="stylesheetid" parameter="style"></select>
+                                    </td>
+                                    <td class="bg-white-85">Word/Height</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <input class="form-control" type="text" id="mbodysize" onkeydown="return validateCharacters(this,event, 'numeric')" autocomplete="off" maxlength="3" style="width:45px;" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="bg-white-85">Logo</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <select class="form-control" style="background-color:#fff !important;" id="islogo"></select>
+                                    </td>
+                                    <td class="bg-white-85">File</td>
+                                    <td class="bg-white-95" colspan="4">
+                                        <div class="custom-file">
+                                            <input type="file" class="form-control custom-file-input" id="file_center" name="files[]" style="opacity:0 !important;" placeholder="Choose file..." required />
+                                            <label class="custom-file-label" for="file" style="font-size:11px !important;text-align:left;margin-top: 3px;height:15px;overflow:hidden;" id="lblfile"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="card" style="display:none;">
+                    <div class="card-body" id="displaytext">
+                        <div class="form-group margin-b-5">
+                            <input type="text" id="txtscheduleins" class="form-control form-control-sm boder-radius-zero" placeholder="Type Scheduling Instructions" title="Scheduling Instructions" autocomplete="off" />
+
+                        </div>
+                        <div class="form-group margin-b-0">
+                            <input type="text" id="txtprodins" class="form-control form-control-sm boder-radius-zero" placeholder="Type Material Instructions" title="Material Instructions" autocomplete="off" style="width:49%;float:left;" />
+                            <input type="text" id="txtbillingins" class="form-control form-control-sm boder-radius-zero" placeholder="Type Billing Instructions" title="Billing Instructions" autocomplete="off" style="width:50%;float:right;" />
+                        </div>
+                    </div>
+
+                    <div class="card-body" id="Classifiedtext" style="display:none;">
+                        <div class="form-group margin-b-0">
+                            <input type="text" id="txtclprodins" class="form-control form-control-sm boder-radius-zero" placeholder="Type Material Instructions" title="Material Instructions" autocomplete="off" style="width:49%;float:left;" />
+                            <input type="text" id="txtclbillingins" class="form-control form-control-sm boder-radius-zero" placeholder="Type Billing Instructions" title="Billing Instructions" autocomplete="off" style="width:50%;float:right;" />
+                        </div>
+                        <div class="form-group margin-b-0" id="Classifiedadtext">
+                            <textarea class="form-control boder-radius-zero" id="adtext" placeholder="Type matter here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="column-right" style="flex: 0 0 23.333333% !important;max-width: 23.333333% !important;height:311px !important;">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-sm table-borderless margin-b-0 table-rate-calculation" id="orderlevelrate" style="height:296px;">
+                            <tbody>
+                                <tr>
+                                    <td align="left">Rate</td>
+                                    <td colspan="3" style="background:#fff;width:175px;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Area</td>
+                                    <td colspan="3" style="background:#fff;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Amount</td>
+                                    <td colspan="3" style="background:#fff;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Box Charges</td>
+                                    <td colspan="3" style="background:#fff;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Discount</td>
+                                    <td colspan="3" style="background:#fff;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Charges</td>
+                                    <td colspan="3" style="background:#fff;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left">VAT</td>
+                                    <td colspan="3" style="background:#fff;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Receivable</td>
+                                    <td colspan="3" style="background:#fff;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @*<div class="card flexible-box" id="tblreceipt" style="pointer-events:none;">
+                        <div class="card-body">
+                            <p class="reciept-num" style="float:left">ROID <span id="spnroid">#####</span></p>
+                            <p class="receipt-details">
+                                @*<input type="button" id="btnmore" value="More..." onclick="ViewCancelReceiptDetails()" />
+                                <span> Deferred </span>
+                            </p>
+                            <p class="receipt-checkbox">
+                                <input type="checkbox" id="chkdiffer" style="height:15px;width:20px;" onclick="CheckDifferReceipt()" />
+                                <input type="hidden" id="hdnchkdiffer" value="0" />
+                            </p>
+                            <p class="reciept-num">ReceiptID <span id="spnreceiptnum">#####</span></p>
+                            <table class="table table-sm table-borderless margin-b-0 table-reciept" id="tablereceiptdetails">
+                                <thead>
+                                    <tr>
+                                        <th>Pay Mode</th>
+                                        <th>Branch Code</th>
+                                        <th>Number</th>
+                                        <th>Amount</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="receiptfield1">
+                                        <td>
+                                            <select style="background-color:#fff !important;" id="txtpaymentmodeid" newflag="forReceiptXmltype" parameter="receiptpaymentmode"></select>
+                                        </td>
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtbankname" newflag="forBranchXmltype" parameter="branchcode"></select>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum" style="width:70px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off" />
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtamount" style="width:70px;text-align:right !important;" onkeydown="return validateCharacters(this,event, 'amount')" autocomplete="off" />
+                                        </td>
+                                    </tr>
+                                    <tr id="receiptfield2">
+                                        <td>
+                                            <select style="background-color:#fff !important;" id="txtpaymentmodeid1" newflag="forReceiptXmltype" parameter="receiptpaymentmode"></select>
+                                        </td>
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtbankname1" newflag="forBranchXmltype" parameter="branchcode"></select>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum1" style="width:70px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off" />
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtamount1" style="width:70px;text-align:right !important;" onkeydown="return validateCharacters(this,event, 'amount')" autocomplete="off" />
+                                        </td>
+                                    </tr>
+                                    <tr id="receiptfield3">
+                                        <td>
+                                            <select style="background-color:#fff !important;" id="txtpaymentmodeid2" newflag="forReceiptXmltype" parameter="receiptpaymentmode"></select>
+                                        </td>
+                                        <td>
+                                            <select style="background-color:#fff !important;width: 120px;" id="txtbankname2" newflag="forBranchXmltype" parameter="branchcode"></select>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtchequenum2" style="width:70px;" onkeydown="return validateCharacters(this,event, 'numeric')" maxlength="10" autocomplete="off" />
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtamount2" style="width:70px;text-align:right !important;" onkeydown="return validateCharacters(this,event, 'amount')" autocomplete="off" />
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                            <table class="table table-sm table-borderless margin-b-0 margin-t-5 table-reciept-total">
+                                <thead>
+                                    <tr>
+                                        <td>T. Amt</td>
+                                        <td>
+                                            <input type="text" id="txtreceiptamount" style="width:65px;text-align:right;" onkeydown="return validateCharacters(this,event, 'numeric')" autocomplete="off" />
+                                        </td>
+                                        <td>Return</td>
+                                        <td id="txtreturnamount" style="text-align:right;"></td>
+                                        <td>
+                                            <input type="button" class="btn btn-darkgreean-small" onclick="TotalWriteoffAmount()" value="Write off" />
+                                        </td>
+                                        <td id="txtwriteoffamount" style="text-align:right !important"></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>*@
+            </div>
+
+
+
+        </div>
+
+        <div class="action-bar">
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btngetrate" onclick="GetBookingRate()">GET RATE<img class="icon" src="~/img/receipt-Rs.png" style="height:16px !important;width:16px !important;" alt="" /></a>
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btnneworder" onclick="RefreshBooking()">NEW ORDER <img class="icon" src="~/img/plus-math-16.png" alt="" /></a>
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" onclick="SaveBookingDetail()" id="txtsaveupdate">SAVE ORDER<img class="icon" src="~/img/checkmark-16.png" alt="" /></a>
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" onclick="BookingVieOrder()">VIEW ORDER<img class="icon" src="~/img/view.png" alt="" /></a>
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btncopy" onclick="GetCopyOrder()">COPY ORDER<img class="icon" src="~/img/copy-16.png" alt="" /></a>
+            @*<a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btnsuspend">SUSPEND ORDER<img class="icon" src="~/img/delete-16.png" alt="" /></a>*@
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btncancel">CANCEL ORDER<img class="icon" src="~/img/trash-can-16.png" alt="" /></a>
+            <a href='@Url.Action("History", "BookingApproval")' target="_blank" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true">MY LOG<img class="icon" src="~/img/log-16.png" alt="" /></a>
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btnhistory" onclick="BookingHistoryDetail()">HISTORY<img class="icon" src="~/img/time-machine-16.png" alt="" /></a>
+            <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btnprint" onclick="PrintfileDownload()">PRINT<img class="icon" src="~/img/print-16.png" alt="" /></a>
+            @*<a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btncancelreceipt" onclick="CancelReceipt()">CANCEL RECEIPT<img class="icon" src="~/img/trash-can-16.png" alt="" /></a>
+                <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btnnewreceipt" onclick="ViewNewReceiptDetails()">RECEIPT<img class="icon" src="~/img/receipt-Rs.png" style="height:16px !important;width:16px !important;" alt="" /></a>*@
+        </div>
+
+    </div>
+
+    <!-- Build Trail window -->
+    <div id="toggleNavigationLeft" class="tm tm_left">
+        <div class="tm_header">
+            <label style="max-height: 40px;margin-right: auto;max-width: 220px;">Build Details</label>
+            <span class="close" id="close-btn-left">
+                <img src="~/img/cross_white_24.png" style="height:16px;margin-bottom:7px;" onclick="return $('#toggleNavigationLeft').removeClass('open');" />
+            </span>
+        </div>
+        <div id="detaildiv" style="margin:10px;color:green;"></div>
+    </div>
+
+    <!-- Ad text window -->
+    <div id="AdtextPopUp" title="Ad Text" style="display: none;">
+        <div class="dialog-body cancle-receipt-body">
+            <div style="font-size:15px">
+                <label>SUO-COL</label>
+                <input type="text" style="height:20px;" />
+                <div style="float:right;width:65%;">
+                    <input type="checkbox" id="chkdiffer" style="height:15px;width:20px;" onclick="CheckDifferReceipt()">
+                    <input type="hidden" id="hdnchkdiffer" value="0">
+                </div>
+            </div>
+            <div style="font-size:15px">
+                <label style="width:69px;">SIL-COL</label>
+                <input type="text" style="height:20px;" />
+                <div style="float:right;width:65%;">
+                    <input type="checkbox" id="chkdiffer" style="height:15px;width:20px;" onclick="CheckDifferReceipt()" checked>
+                    <input type="hidden" id="hdnchkdiffer" value="0">
+                </div>
+            </div>
+            <div style="font-size:15px">
+                <span> Deferred </span>
+                <div style="float:right;width:92%;">
+                    <input type="checkbox" id="chkdiffer" style="height:15px;width:20px;" onclick="CheckDifferReceipt()">
+                    <input type="hidden" id="hdnchkdiffer" value="0">
+                </div>
+            </div>
+            <div class="form-group margin-b-1">
+                <textarea class="form-control boder-radius-zero" id="popupadtext" onkeypress="if(event.keyCode == 13){return false}" placeholder="Type matter here..." style="height:280px;font-size:26px;"></textarea>
+            </div>
+            <div style="float:left;font-size:15px;">
+                <span id="spnNoOfWords">0</span> Words
+                <span id="spnNoOfCharacters">0</span> Characters
+            </div>
+            <div style="float:right;">
+                <button type="button" class="btn btn-darkgreean btn-sm" style="width:100px;" onclick="ApplyPopuptext()">APPLY</button>
+                <button type="button" class="btn btn-darkgreean btn-sm" style="width:100px;" title="Apply to All ins. of same PE" onclick="ApplyToAllPopuptext()">APPLY ALL</button>
+                <button type="button" class="btn btn-darkgreean btn-sm" style="width:100px;" onclick="CancelPopuptext()">CANCEL</button>
+            </div>
+            @*<div style="width:3%;float:right;">
+                    <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" onclick="BoldAdtext()" style="color:#fff;">B</a>
+                    <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btnzoomin" onclick="ZoomIn()" style="font-size:10px;"><img src="~/img/plus-math-16.png" alt="" /></a>
+                    <a href="#" class="btn btn-darkgreean btn-sm" role="button" aria-pressed="true" id="btnzoomout" onclick="ZoomOut()" style="font-size:10px;"><img src="~/img/minus-16.png" alt="" /></a>
+                </div>*@
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="~/Script/jquery-1.10.2.js"></script>
+    <script src="~/vendor/jquery.min.js"></script>
+    <script src="~/vendor/jquery-ui/jquery-ui.js"></script>
+    <script src="~/vendor/popper.min.js" type="text/javascript"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/vendor/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/vendor/bootstrap-multiselect/js/bootstrap-multiselect.js" type="text/javascript"></script>
+    <script src="~/Script/Main.js"></script>
+    <script src="~/css/chosen/chosen.js"></script>
+
+    <script type="text/javascript">
+
+        var validDays = 0; // 127 in old code
+        var packageIDRunDays = 127;
+        var calenderFlag = false;
+        var NxtPublicationDt = new Date(serverDate);
+        var IsBackDateAllow = false;
+        var selectedDateArray = [];
+        NxtPublicationDt.setDate(NxtPublicationDt.getDate() + 1);
+        numberOfMonths = 2;
+        ctrlKeyPassed = false;
+        monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
+            "September", "October", "November", "December"];
+
+        month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        $(document).ready(function () {
+
+            $('.lnkAdType').click(function () {
+                $('.lnkAdType').parent().removeClass('active');
+                $(this).parent().addClass('active');
+                $('#hdnIsClassified').val($(this).attr('val'));
+                if ($('#hdnIsClassified').val() == "0") {
+                    $("#tr1").show();
+                    $("#tr2").show();
+                    $("#tr3").show();
+                    $("#tr4").show();
+                    $("#tr5").hide();
+                    $("#tr6").hide();
+                    $("#tr7").hide();
+                    $("#tr8").hide();
+                    //$("#displayheader").show();
+                    //$("#cltabledetail").hide();
+                    //$("#dstabledetail").show();
+                    //$("#Classifiedtext").hide();
+                    //$("#displaytext").show();
+                    //$("#uomid").attr("disabled", false);
+                    //$("#mattypeid").attr("disabled", false);
+
+                }
+                else {
+                    $("#tr1").hide();
+                    $("#tr2").hide();
+                    $("#tr3").hide();
+                    $("#tr4").hide();
+                    $("#tr5").show();
+                    $("#tr6").show();
+                    $("#tr7").show();
+                    $("#tr8").show();
+                    //$("#displayheader").hide();
+                    //$("#classifiedheader").show();
+                    //$("#dstabledetail").hide();
+                    //$("#cltabledetail").show();
+                    //$("#displaytext").hide();
+                    //$("#Classifiedtext").show();
+                    //$("#uomid").attr("disabled", true);
+                    //$("#mattypeid").attr("disabled", true);
+                }
+            });
+
+            $('.lnkCustType').click(function () {
+                $('.lnkCustType').parent().removeClass('active')
+                $(this).parent().addClass('active');
+                $('#hdnIsCustomerType').val($(this).attr('val'));
+            });
+
+            $('.lnkPayType').click(function () {
+                $('.lnkPayType').parent().removeClass('active')
+                $(this).parent().addClass('active');
+                $('#hdnIsPaymentType').val($(this).attr('val'));
+            });
+
+            $('#datePicker').datepicker({
+                numberOfMonths: 3,
+                dateFormat: "dd/mm/yy",
+                defaultDate: NxtPublicationDt,
+            });
+
+            $('#AdtextPopUp').dialog({
+                autoOpen: false,
+                width: 950,
+                height: 490,
+                modal: true,
+                dialogClass: "base-theme"
+            });
+
+            ReadBuildDetailFile();
+
+        });
+
+        function OpenBuildToggle() {
+            if ($('#toggleNavigationLeft').hasClass('open')) {
+                $('#toggleNavigationLeft').removeClass('open');
+            }
+            else {
+                $('#toggleNavigationLeft').addClass('open');
+            }
+        }
+
+        function ReadBuildDetailFile() {
+            var url = appRoot + "Booking/ReadBuildDetailFile";
+            var param = {};
+            var result = getresult(url, param);
+            $("#detaildiv").html(result);
+        }
+
+
+
+    </script>
+
+</body>
+</html>
